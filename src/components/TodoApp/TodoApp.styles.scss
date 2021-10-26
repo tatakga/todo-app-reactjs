@@ -1,0 +1,324 @@
+@mixin tablet {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+.todo {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--bg-todo);
+
+  &__container {
+    max-width: 327px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    width: 100%;
+  }
+
+  &__header {
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #fff;
+    height: 200px;
+
+    .todo__container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    button {
+      padding: 0;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      cursor: pointer;
+    }
+
+    img {
+      width: 20px;
+      height: 20px;
+    }
+
+    h1 {
+      font-size: 25px;
+      letter-spacing: 11px;
+      font-weight: 700;
+    }
+  }
+  &__content {
+    margin-top: -92px;
+  }
+  &__form {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  &__input__container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: var(--bg-box-item);
+    padding: 13px 20px 13px 53px;
+    border-radius: 8px;
+    &::before {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 20px;
+      border-radius: 50%;
+      background-color: transparent;
+      border: solid 2px var(--border-color);
+    }
+
+    input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 12px;
+      background-color: transparent;
+      color: var(--todo-text-color);
+      &::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: var(--placeholder-color);
+        opacity: 1; /* Firefox */
+      }
+
+      &:-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: var(--placeholder-color);
+      }
+
+      &::-ms-input-placeholder {
+        /* Microsoft Edge */
+        color: var(--placeholder-color);
+      }
+    }
+  }
+  &__list__action {
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--bg-box-item);
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1rem;
+  }
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
+  &__item {
+    background-color: transparent;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 20px;
+    border-bottom: solid 1px var(--border-color);
+  }
+  &__delete {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: 12px;
+
+    img {
+      width: 13px;
+      height: 13px;
+    }
+  }
+  &__toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: solid 1px var(--border-color);
+    border-radius: 50%;
+    margin-right: 12px;
+    cursor: pointer;
+    &:hover {
+      border: solid 1px hsl(280, 87%, 65%);
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      width: 9px;
+      height: 7px;
+      background-image: url("../../images/icon-check.svg");
+      opacity: 0;
+    }
+  }
+  &__text {
+    width: 75%;
+    word-wrap: break-word;
+    color: var(--todo-text-color);
+    font-size: 12px;
+  }
+  &__action {
+    padding: 1rem 20px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    p {
+      color: #bfbec6;
+    }
+    > div {
+      display: none;
+      gap: 20px;
+    }
+  }
+  &__filter {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    color: #a1a1ab;
+    margin: 0;
+    padding: 0;
+    &:hover {
+      color: hsl(220, 98%, 61%);
+    }
+  }
+  &__clear__complete {
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: #c9c8cd;
+  }
+  &__sp__filter {
+    margin-bottom: 2.5rem;
+    font-size: 14px;
+    .todo__container {
+      > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: var(--bg-box-item);
+        box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.2);
+        padding: 1rem;
+        gap: 20px;
+      }
+    }
+  }
+  &__note {
+    text-align: center;
+    color: #a6a5ab;
+  }
+}
+
+.todo__item.complete {
+  .todo__text {
+    text-decoration: line-through;
+    color: var(--todo-complete-color);
+  }
+  .todo__toggle {
+    background-image: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+@include tablet {
+  .todo {
+    &__header {
+      height: 300px;
+
+      h1 {
+        font-size: 40px;
+      }
+
+      .todo__container {
+        margin-top: 5rem;
+      }
+    }
+    &__content {
+      margin-top: -142px;
+    }
+    &__form {
+      margin-bottom: 1.5rem;
+    }
+    &__action {
+      > div {
+        display: flex;
+      }
+    }
+    &__container {
+      max-width: 512px;
+    }
+    &__item {
+      padding: 20px 24px;
+    }
+    &__text {
+      width: 85%;
+      font-size: 18px;
+    }
+    &__sp__filter {
+      display: none;
+    }
+    &__content {
+      margin-bottom: 3.125rem;
+    }
+    &__toggle {
+      margin-right: 24px;
+    }
+    &__input__container {
+      padding: 20px 24px 20px 70px;
+      &::before {
+        left: 24px;
+      }
+      input {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+body.light {
+  .todo {
+    --bg-todo: #fafafa;
+    --bg-box-item: #ffffff;
+    --border-color: #e6e5e9;
+    --placeholder-color: #cac9cf;
+    --todo-text-color: #4a4b61;
+    --todo-complete-color: #d4d5d9;
+    &__header {
+      background-image: url("../../images/bg-mobile-light.jpg");
+      @include tablet {
+        background-image: url("../../images/bg-desktop-light.jpg");
+      }
+    }
+  }
+}
+body.dark {
+  --bg-todo: #181824;
+  --bg-box-item: #25273c;
+  --border-color: #37394e;
+  --placeholder-color: #717388;
+  --todo-text-color: #b6b8d1;
+  --todo-complete-color: #41435a;
+  .todo {
+    &__header {
+      background-image: url("../../images/bg-mobile-dark.jpg");
+      @include tablet {
+        background-image: url("../../images/bg-desktop-dark.jpg");
+      }
+    }
+  }
+}
